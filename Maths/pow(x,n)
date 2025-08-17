@@ -1,0 +1,70 @@
+//50. Pow(x, n) ->> medium ->.leetcode 
+
+
+// we do this using 2 methods 
+
+
+// number 1 -> Math.pow(x , n )  
+
+// number 2 -> recursion -> but it fails due to time complexity , stack overflow error , and managing negative 
+
+// for this we enchane it and make code  
+
+class Solution {
+    public double power(double x , int n ){
+         if (n == 0) return 1;
+
+        double half = power(x, n / 2);
+
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
+        }
+    }
+    public double myPow(double x, int n) {
+       
+        if (n< 0) {
+            return 1.0 / power(x, -n);
+        }
+        return power(x, n);
+    }
+}
+
+// time complexity -> o(log n ) 
+// space complexity ->  o(log n ) 
+
+
+🔹 Case 1: Even exponent
+
+Suppose n = 10.
+x ^ 10 -> x^ 5 * x^ 5
+
+So we can compute x^5 once (half), then just square it:
+
+
+🔹 Case 2: Odd exponent
+x^5 -> x^4 * x -> x^2 * x^2 * x 
+
+
+
+// iterative version 
+class Solution {
+    public double myPow(double x, int n) {
+        long N = n;  // use long for edge cases like Integer.MIN_VALUE
+        if (N < 0) {
+            x = 1 / x;
+            N = -N;
+        }
+
+        double result = 1.0;
+        while (N > 0) {
+            if ((N % 2) == 1) {   // if N is odd
+                result *= x;
+            }
+            x *= x;   // square the base
+            N /= 2;   // divide exponent by 2
+        }
+        return result;
+    }
+}
