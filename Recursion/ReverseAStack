@@ -1,0 +1,35 @@
+reverse a stack -> gfg -> link : https://www.geeksforgeeks.org/problems/reverse-a-stack/1
+
+
+class Solution {
+    
+    static void insert(Stack<Integer>s , int temp){
+        // base
+        if(s.size() == 0){
+            s.push(temp);
+            return ;
+        }
+        //recursive
+        
+        int val = s.pop() ; // in java pop func remove and return , but if you want top eleemnet you used s.peek() 
+        insert(s , temp) ; 
+        //hypo
+        s.push(val) ; 
+        
+    }
+    static void reverse(Stack<Integer> St) {
+        // base condn
+        if(St.size() == 0){
+            return ; 
+        }
+        
+        else{
+            // recursive 
+           
+            int temp = St.pop() ; 
+            reverse(St) ; 
+            // hypothesis
+            insert(St , temp) ; 
+        }
+    }
+}
