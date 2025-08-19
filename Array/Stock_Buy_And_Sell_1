@@ -1,0 +1,29 @@
+leetcode (121) -> https://leetcode.com/problems/best-time-to-buy-and-sell-stock/ 
+
+class Solution {
+    public int maxProfit(int[] prices) {
+
+
+        //logic 
+        /*
+            we find minimum element , 
+            and maximum difference in them 
+            for more understanding please 
+            dry run this code 
+
+        */
+
+        int mini = prices[0] ; 
+        int maxProfit = 0 ; 
+
+        for(var ch : prices){
+            if(ch < mini){
+                mini = ch ;
+            }
+            else{
+                maxProfit = Math.max(maxProfit,ch-mini) ; 
+            }
+        }
+        return maxProfit ; 
+    }
+}
