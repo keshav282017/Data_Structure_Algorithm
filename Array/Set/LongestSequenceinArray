@@ -1,0 +1,39 @@
+leetcode 128 -> https://leetcode.com/problems/longest-consecutive-sequence/
+
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+// taking set 
+         Set<Integer> mySet = new HashSet<>() ; 
+        // adding elements in set ( removing duplicates ) 
+         for(var num : nums){
+            mySet.add(num) ; 
+         }
+
+        
+  //TRICK :  for finding the longest sequence we just need to add +1 in number and see if it present in set or not 
+untill it present we just increase the maxLenth , when num +1 is not present we start again , and maxi the maxlength
+
+// so in this approach the most important think to get is from where to start 
+// we start from the num whose num-1 is not present in set , because it means it is our starting point.
+         
+          int maxi = 0 ; 
+         for(var num : mySet){
+                if(!mySet.contains(num-1)){
+                    int currentNumber = num;
+                    int maxLength = 1 ;
+                    // loop through untill we get currentnumber+1
+                    while(mySet.contains(currentNumber+1)){
+                        currentNumber +=1; 
+                        maxLength += 1; 
+                    } 
+                    
+                    maxi = Math.max(maxi , maxLength) ; 
+            
+                }
+         }
+
+        return maxi ; 
+
+    }
+}
