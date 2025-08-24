@@ -50,5 +50,46 @@ tc -> o(n)
 sc -> o(1) 
 
 
+class Solution {
+    Node divide(Node head) {
+        Node oddhead = null, oddtail = null;
+        Node evenhead = null, eventail = null;
+
+        Node temp = head;
+
+        while (temp != null) {
+            if (temp.data % 2 == 0) {  // even
+                if (evenhead == null) {
+                    evenhead = temp;
+                    eventail = temp;
+                } else {
+                    eventail.next = temp;
+                    eventail = temp;
+                }
+            } else {  // odd
+                if (oddhead == null) {
+                    oddhead = temp;
+                    oddtail = temp;
+                } else {
+                    oddtail.next = temp;
+                    oddtail = temp;
+                }
+            }
+            temp = temp.next;
+        }
+
+        // if no evens, return odd list
+        if (evenhead == null) return oddhead;
+
+        // connect even list with odd list
+        eventail.next = oddhead;
+
+        // terminate the odd list
+        if (oddtail != null) oddtail.next = null;
+
+        return evenhead;
+    }
+}
+
 
 
