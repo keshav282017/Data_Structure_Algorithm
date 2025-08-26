@@ -1,0 +1,110 @@
+leetcode 19 -> 
+
+approach 1 : 
+
+t.c -> o(2n) -> o(n)  
+s.c -> o(1) 
+
+simple appraoch what we do is 
+1> calcualte length of the linked list 
+2> then calculate nodeToBeDeleted = length - n  
+3> then we move till we got our temp pointer to the node just before the node to be deleted
+4> then we delete the node and return head 
+5> for edge case if node is head which need to be deleted 
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head.next == null){
+            return null ; 
+        }
+        int size = 0 ; 
+            ListNode temp = head;
+            //getting size
+            while(temp != null){
+                size += 1; 
+                temp = temp.next;
+            }
+
+            int nodeToBeDeleted = size - n ; 
+
+        // Edge case: if we need to delete the head
+      we need this because for nodetobedelte 0 loop never run so in end we did temp.next = temp.next.next which delete second node not first
+      and our code give wrong answer so we just need to return head.next as a different edge case . 
+        if (nodeToBeDeleted == 0) {
+            return head.next;
+        }
+            
+            temp = head;
+            while(nodeToBeDeleted > 1 ){
+                 
+                temp = temp.next;
+                nodeToBeDeleted -- ; 
+            }
+
+            temp.next = temp.next.next ; 
+
+            return head;
+
+
+    }
+
+
+  approach 2: with two pointer technique 
+  Use fast and slow pointer to remove the N-th node in one traversal.
+
+  class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+
+        // Move fast n+1 steps ahead
+        for (int i = 0; i <= n; i++) {
+            fast = fast.next;
+        }
+
+        // Move both until fast reaches end
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        // Delete the node
+        slow.next = slow.next.next;
+
+        return dummy.next;
+    }
+}
+
+}
+
+the use of dummy node is for head node delete case , which we also handle using if cond differently , 
+
+appraoch 3 : without dummy node 
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // Step 1: move fast pointer n steps ahead
+        ListNode fast = head;
+        ListNode slow = head;
+
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        // Step 2: if fast is null, we need to delete head
+        if (fast == null) {
+            return head.next;  // delete head
+        }
+
+        // Step 3: move both pointers until fast reaches the last node
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        // Step 4: delete the target node
+        slow.next = slow.next.next;
+
+        return head;
+    }
+}
