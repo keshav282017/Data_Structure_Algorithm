@@ -1,0 +1,40 @@
+leetcode 48 
+
+appraoch : 
+
+1>transpose square matrix 
+2> Swap each row 
+
+
+points to notice ; 
+
+  collections.reverse list k lia chlta h islie manual likhna pdega nhi to convert kro 
+  transpose of square matrix and rectangular matrix code is different 
+
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        //transpose the matrix 
+        int n = matrix.length ; 
+        for(int i=0;i<n ; i++){
+            for(int j=i+1;j<n;j++){
+                 int temp = matrix[i][j] ; 
+                 matrix[i][j] = matrix[j][i] ; 
+                 matrix[j][i] = temp ;  
+            }
+        }
+
+        // reverse each row
+        for (int i = 0; i < n; i++) {
+        int left = 0, right = n - 1;
+        while (left < right) {
+        int temp = matrix[i][left];
+        matrix[i][left] = matrix[i][right];
+        matrix[i][right] = temp;
+        left++;
+        right--;
+    }
+}
+        
+    }
+}
