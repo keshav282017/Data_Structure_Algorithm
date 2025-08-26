@@ -1,0 +1,36 @@
+leetcode 3000 
+
+
+area of rectangle - > length  * width 
+
+diagonal = sqrt(length^2 * width^2) // for comparing in this ques we don't need to find sqrt , as it slow your tc , 
+
+
+class Solution {
+    public int areaOfMaxDiagonal(int[][] dimensions) {
+        int row = dimensions.length ; 
+
+        int maxiDiagonal = 0; 
+        int maxiArea = 0 ; 
+
+        for(int i= 0; i<row ; i++){
+            int length = dimensions[i][0] ;
+            int width = dimensions[i][1];
+
+            // diagonal ka square hi compare karo to precision safe rahega
+            int diagonalSq = (length * length) + (width * width); 
+            int area = length * width ; 
+
+            if(diagonalSq > maxiDiagonal){
+                maxiDiagonal = diagonalSq; 
+                maxiArea = area;
+            }
+            else if(diagonalSq == maxiDiagonal){
+                if(area > maxiArea){
+                    maxiArea = area;  // yaha area update karna hai
+                }
+            }
+        }
+        return maxiArea ;   // ✅ area return karna hai
+    }
+}
