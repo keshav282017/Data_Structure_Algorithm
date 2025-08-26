@@ -1,0 +1,28 @@
+leetcode 1614 
+
+appraoch with soln explain : 
+
+class Solution {
+    public int maxDepth(String s) {
+       
+        int maxi = 0 ;      // maximum depth track karne ke liye
+        int open = 0 ;      // abhi tak kitne '(' open hain
+
+        for(int i= 0 ; i< s.length() ; i++){
+            if(s.charAt(i) == '('){
+                open++;  
+                // jab naya '(' mila, depth ek level badh gayi
+                maxi = Math.max(maxi , open); 
+                // max depth update karna
+            }
+            else if(s.charAt(i) == ')'){
+                open--;  
+                // ek bracket close hua, depth ek level kam ho gayi
+            }
+        }
+        return maxi;   // finally max depth return
+    }
+}
+
+
+This question or any question with nesting max parenthesis is solve using STACK  , whenever you see parenthesis always think about stack first . its like SANKET . 
