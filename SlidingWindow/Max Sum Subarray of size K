@@ -1,0 +1,38 @@
+gfg : Max Sum Subarray of size K
+
+
+class Solution {
+    public int maxSubarraySum(int[] arr, int k) {
+        // Code here
+        int sum = 0 ; 
+        int i = 0 , j = 0 ; 
+        int maxsum = 0 ; 
+        
+        while(j < arr.length){
+            sum += arr[j] ; 
+            
+            //we also optimize this code by removing this if condn
+            // if(j-i+1  < k){
+            //     sum += arr[j] ; 
+               
+                
+            // }\
+            
+            // WHY THIS WORK ONLY BY ONE IF
+            // REASON : we always add arr[j] in sum and we do i -- when 
+            // we hit k window so , we never hit > condition . 
+            
+            // if you don't understand leave it , and use one more if
+            
+            if(j-i+1 == k){
+                
+                maxsum = Math.max(maxsum , sum);
+                sum -= arr[i++];
+                
+            }
+            j++;
+        }
+        return maxsum ;
+        
+    }
+}
