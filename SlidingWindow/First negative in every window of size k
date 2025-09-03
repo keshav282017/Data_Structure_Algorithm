@@ -1,0 +1,34 @@
+gfg : 
+
+class Solution {
+    static List<Integer> firstNegInt(int arr[], int k) {
+        // write code here
+        List<Integer> ans = new ArrayList<>();
+        Deque<Integer> dq = new ArrayDeque<>();
+        
+        int n = arr.length;
+        int i = 0, j = 0;
+        
+        while (j < n) {
+            // calculation: add negative numbers into deque
+            if (arr[j] < 0) dq.addLast(j); // store index
+            
+            if (j - i + 1 < k) {
+                j++;
+            } else if (j - i + 1 == k) {
+                // answer from deque
+                if (dq.isEmpty()) ans.add(0);
+                else ans.add(arr[dq.peekFirst()]);
+                
+                // slide window
+                if (!dq.isEmpty() && dq.peekFirst() == i) {
+                    dq.removeFirst();
+                }
+                i++;
+                j++;
+            }
+        }
+        
+        return ans;
+    }
+}
