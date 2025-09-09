@@ -1,0 +1,32 @@
+https://www.geeksforgeeks.org/problems/nearly-sorted-1587115620/1
+
+
+in nearly sorted  k means that the answer of ith element of array is always present in range of i-k to i+k , so we used this 
+
+
+
+class Solution {
+    public void nearlySorted(int[] arr, int k) {
+        // code here
+        
+        
+        PriorityQueue<Integer> minheap = new PriorityQueue<>() ; 
+        
+        int index =0;
+        for(int i= 0;i< arr.length ; i++){
+            //push in heap
+            minheap.add(arr[i]) ; 
+            
+            if(minheap.size() > k){
+                arr[index++] = minheap.poll() ; 
+            }
+            
+        }
+        
+        // now add remaining element of heap in array 
+        while(!minheap.isEmpty()){
+            arr[index++] = minheap.poll() ;
+        }
+        
+    }
+}
